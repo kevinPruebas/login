@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angularlogin-b44a9": {
+      "hosting": {
+        "login": [
+          "angularlogin-b44a9"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angularlogin-b44a9"
+  }
+}
