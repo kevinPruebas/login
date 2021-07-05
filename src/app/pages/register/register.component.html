@@ -1,0 +1,33 @@
+
+  <div class="login-page">
+    <form class="form" [formGroup]="registerForm">
+        <h1>Registro</h1>
+        <input formControlName="name" type="text" placeholder="Nombre"/>
+        <strong class="text-danger error" *ngIf=" registerForm.get('name').touched && registerForm.get('name').errors &&  registerForm.get('name').hasError('required')">*El campo nombre es requerido.</strong>
+         
+        <input formControlName="email" type="email" placeholder="Correo"/>
+        <strong class="text-danger error" *ngIf=" registerForm.get('email').touched && registerForm.get('email').errors &&  registerForm.get('email').hasError('required')">*El campo email es requerido.</strong>
+        <strong class="text-danger error" *ngIf=" registerForm.get('email').touched && registerForm.get('email').errors &&  registerForm.get('email').hasError('pattern')">*Formato incorrecto.</strong>
+        
+        <input formControlName="password" type="password" placeholder="Contraseña"/>
+        <strong class="text-danger error" *ngIf=" registerForm.get('password').touched && registerForm.get('password').errors &&  registerForm.get('password').hasError('required')">*La contraseña es requerida.</strong>
+        
+        <button class="btn btn-primary"  (click)="register()" [disabled]="registerForm.invalid">Registrar usuario</button>
+        <button class="btn btn-primary my-1"  routerLink="/login" routerLinkActive="active">Volver</button>
+    </form>
+  </div>
+
+  <ng-template #contenido let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">{{ titleModal }}</h4>
+        <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        {{ messageModal }}
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="accept()">Aceptar</button>
+    </div>
+</ng-template>

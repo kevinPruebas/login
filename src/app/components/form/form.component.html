@@ -1,0 +1,37 @@
+<div *ngIf="auth.user | async ; else showLogin">
+    <app-profile (logoutEvent)="logout()"></app-profile>
+</div>
+
+<ng-template #showLogin>
+    <div class="login-page">
+        <form class="form" [formGroup]="loginForm">
+        <h1>Login</h1>
+    
+        <input type="email" formControlName="email" placeholder="Correo"/>
+        <strong class="text-danger error" *ngIf=" loginForm.get('email').touched && loginForm.get('email').errors &&  loginForm.get('email').hasError('required')">*El campo email es requerido.</strong>
+        <strong class="text-danger error" *ngIf=" loginForm.get('email').touched && loginForm.get('email').errors &&  loginForm.get('email').hasError('pattern')">*Formato incorrecto.</strong>
+       
+        <input type="password" formControlName="password" placeholder="Contraseña"/>
+        <strong class="text-danger error" *ngIf="loginForm.get('password').touched && loginForm.get('password').errors &&  loginForm.get('password').hasError('required')">*El campo contraseña es requerido.</strong>       
+        
+        <button class="btn btn-primary my-1" (click)="customLogin()" [disabled]="loginForm.invalid">Ingresar con correo</button>
+        <button  (click)="loginWith()">Ingresar con google</button>
+        <p class="message">No estas registrado? <a  routerLink="/register" routerLinkActive="active">Crea una cuenta</a></p>
+     </form>
+    </div>
+</ng-template>
+
+<ng-template #contenido let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">{{ titleModal }}</h4>
+        <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        {{ messageModal }}
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="modal.close()">Aceptar</button>
+    </div>
+</ng-template>
